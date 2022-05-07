@@ -27,6 +27,7 @@ RUN set -xe \
 
 # Install build dependencies using rosdep
 COPY --chown=build:build dummy/package.xml ${CNT_SDK_PATH}/continental_radar_driver/package.xml
+COPY --chown=build:build socket_can/package.xml ${CNT_SDK_PATH}/socket_can/package.xml
 COPY --chown=build:build cav_msgs/package.xml ${CNT_SDK_PATH}/cav_msgs/package.xml
 
 RUN set -xe \
@@ -44,6 +45,7 @@ RUN rm ${CNT_SDK_PATH}/continental_radar_driver/package.xml
 
 # Set up build environment
 COPY --chown=build:build continental_radar_driver ${CNT_SDK_PATH}/continental_radar_driver
+COPY --chown=build:build socket_can ${CNT_SDK_PATH}/socket_can
 COPY --chown=build:build cav_msgs ${CNT_SDK_PATH}/cav_msgs
 
 USER build:build
@@ -60,5 +62,5 @@ RUN /opt/ros/${ROS_DISTRO}/env.sh catkin_make -DCMAKE_BUILD_TYPE=Release
 # Command for running Continental ROS:
 CMD ["bash", "-c", "set -e \
 && . ./devel/setup.bash \
-&& rosrun radar_conti radar_conti \
+&& roslaunch ars_40X ars_40X.launch \
 ", "ros-entrypoint"]
