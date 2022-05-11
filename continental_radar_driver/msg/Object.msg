@@ -6,7 +6,6 @@ geometry_msgs/AccelWithCovariance relative_acceleration
 
 float32 length
 float32 width
-float32 orientation_angle
 
 float32 rcs
 int8 dynamic_property
