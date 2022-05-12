@@ -1,13 +1,13 @@
 <launch>
-  <arg name="visualize" default="true"/>
+  <arg name="visualize" default="false"/>
   <arg name="obstacle_array" default="false"/>
 
   <node pkg="ars_40X" type="ars_40X_ros" name="ars_40X_ros" output="screen">
     <!--<param name="frame_id" value="radar_link"/>-->
   </node>
+  <node pkg="ars_40X" type="ars_40X_rviz" name="ars_40X_rviz"/>
 
   <group if="$(arg visualize)">
-    <node pkg="ars_40X" type="ars_40X_rviz" name="ars_40X_rviz"/>
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ars_40X)/rviz_cfg/ars_40X.rviz"/>
   </group>
 

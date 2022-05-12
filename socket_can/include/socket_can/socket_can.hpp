@@ -18,33 +18,33 @@
 #include <linux/can/raw.h>
 
 namespace socket_can
-{
-class SocketCAN
-{
- public:
-  SocketCAN(const char * ifname);
+{    
+    class SocketCAN
+    {    
+        public:
+            SocketCAN(const char * ifname);
 
-  SocketCAN(const char * ifname, long timeout);
+            SocketCAN(const char * ifname, long timeout);
 
-  ~SocketCAN();
+            ~SocketCAN();
 
-  bool is_connected();
+            bool is_connected();
 
-  bool write(uint32_t frame_id, uint8_t dlc, uint8_t * data);
+            bool write(uint32_t frame_id, uint8_t dlc, uint8_t * data);
 
-  bool read(uint32_t * can_id, uint8_t * dlc, uint8_t * data);
+            bool read(uint32_t * can_id, uint8_t * dlc, uint8_t * data);
 
- private:
-  void init();
+        private:
+            void init();
 
-  const char * ifname_;
+            const char * ifname_;
 
-  int socket_;
+            int socket_;
 
-  bool connected_;
+            bool connected_;
 
-  long timeout_;
-};
+            long timeout_;
+    };
 }
 
 #endif //SOCKET_CAN_SOCKET_CAN_HPP

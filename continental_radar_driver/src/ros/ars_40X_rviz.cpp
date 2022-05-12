@@ -6,9 +6,10 @@
 #include "ars_40X/ObjectList.h"
 #include "ars_40X/ros/ars_40X_rviz.hpp"
 
-namespace ars_40X {
-
-    ContinentalRadarRViz::ContinentalRadarRViz() {
+namespace ars_40X
+{
+    ContinentalRadarRViz::ContinentalRadarRViz()
+    {
         ros::NodeHandle nh;
 
         // Define publishers.
@@ -23,15 +24,14 @@ namespace ars_40X {
             nh.subscribe("ars_40X/objects", 10, &ContinentalRadarRViz::objects_callback, this);
     }
 
-    ContinentalRadarRViz::~ContinentalRadarRViz() {
-    }
+    ContinentalRadarRViz::~ContinentalRadarRViz() {}
 
-    void ContinentalRadarRViz::clusters_callback(ars_40X::ClusterList cluster_list) {
-        
+    void ContinentalRadarRViz::clusters_callback(ars_40X::ClusterList cluster_list)
+    {    
         visualization_msgs::MarkerArray marker_array;
 
-        for (auto cluster : cluster_list.clusters) {
-            
+        for (auto cluster : cluster_list.clusters)
+        {    
             visualization_msgs::Marker marker;
 
             marker.type = visualization_msgs::Marker::CUBE;
@@ -97,9 +97,9 @@ namespace ars_40X {
                 }
             }
 
-            marker.scale.x = 0.4;
-            marker.scale.y = 0.4;
-            marker.scale.z = 0.4;
+            marker.scale.x = 0.8;
+            marker.scale.y = 0.8;
+            marker.scale.z = 0.8;
 
             marker.lifetime.fromSec(1 / 12.9);
 
@@ -109,12 +109,12 @@ namespace ars_40X {
         clusters_pub_.publish(marker_array);
     }
 
-    void ContinentalRadarRViz::objects_callback(ars_40X::ObjectList object_list) {
-        
+    void ContinentalRadarRViz::objects_callback(ars_40X::ObjectList object_list)
+    {
         visualization_msgs::MarkerArray marker_array, text_array;
 
-        for (auto object : object_list.objects) {
-            
+        for (auto object : object_list.objects)
+        {
             visualization_msgs::Marker marker;
 
             if (object.class_type == POINT)
@@ -275,7 +275,7 @@ namespace ars_40X {
             text.pose = object.position.pose;
             text.pose.position.z = 2.0;
 
-            text.scale.z = 0.4;
+            text.scale.z = 0.6;
 
             text.color.r = 1.0;
             text.color.g = 1.0;
