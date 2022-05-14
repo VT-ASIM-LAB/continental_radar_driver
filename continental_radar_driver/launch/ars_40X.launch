@@ -4,6 +4,7 @@
 
   <node pkg="ars_40X" type="ars_40X_ros" name="ars_40X_ros" output="screen">
     <!--<param name="frame_id" value="radar_link"/>-->
+    <remap from="odom" to="/hardware_interface/vehicle/twist"/>
   </node>
   <node pkg="ars_40X" type="ars_40X_rviz" name="ars_40X_rviz"/>
 
