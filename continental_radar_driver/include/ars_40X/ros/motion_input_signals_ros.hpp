@@ -2,7 +2,7 @@
 #define ARS_40X_MOTION_INPUT_SIGNALS_ROS_HPP
 
 #include <ros/ros.h>
-#include <geometry_msgs/Twist.h>
+#include <geometry_msgs/TwistStamped.h>
 
 #include <cstdint>
 
@@ -10,14 +10,15 @@
 
 namespace ars_40X
 {
-    class MotionInputSignalsROS {
+    class MotionInputSignalsROS
+    {
         public:
             MotionInputSignalsROS(ros::NodeHandle &nh, ARS_40X_CAN *ars_40X_can);
 
             ~MotionInputSignalsROS();
 
         private:
-            void odom_callback(geometry_msgs::Twist msg);
+            void odom_callback(geometry_msgs::TwistStamped msg);
 
             ARS_40X_CAN *ars_40X_can_;
 

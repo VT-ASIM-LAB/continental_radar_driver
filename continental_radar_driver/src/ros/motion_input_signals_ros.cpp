@@ -12,8 +12,8 @@ namespace ars_40X
 
     MotionInputSignalsROS::~MotionInputSignalsROS() {}
 
-    void MotionInputSignalsROS::odom_callback(geometry_msgs::Twist msg) {
-        double speed = msg.linear.x;
+    void MotionInputSignalsROS::odom_callback(geometry_msgs::TwistStamped msg) {
+        double speed = msg.twist.linear.x;
         speed_information_->set_speed(std::abs(speed));
 
         if (speed < 0.0) {
@@ -24,7 +24,7 @@ namespace ars_40X
             speed_information_->set_speed_direction(motion_input_signals::STANDSTILL);
         }
 
-        yaw_rate_information_->set_yaw_rate(msg.angular.z * 180.0 / M_PI);
+        yaw_rate_information_->set_yaw_rate(msg.twist.angular.z * 180.0 / M_PI);
 
         ars_40X_can_->send_radar_data(can_messages::SpeedInformation);
         ars_40X_can_->send_radar_data(can_messages::YawRateInformation);
