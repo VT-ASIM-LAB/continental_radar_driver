@@ -1,9 +1,10 @@
-# Selects the sorting index for the object list (ignored for
-# clusters as they are always sorted by range)
-#
-# no sorting
-# sorted by range
-# sorted by RCS
+# Selects the sorting index for the object list (ignored for clusters as they are always sorted by
+# range).
+
+# 0x0: no sorting
+# 0x1: sorted by range
+# 0x2: sorted by RCS
 
 uint8 sort_index
 ---
+bool success

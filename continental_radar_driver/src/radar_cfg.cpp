@@ -20,7 +20,9 @@ namespace ars_40X
         RadarCfg::~RadarCfg() {}
 
         bool RadarCfg::set_max_distance(uint64_t distance, bool valid) {
-            if (distance < 90 || distance > 1000) {
+            // Change max distance limits based on model and software version.
+            // Using values for ARS408 Standard Range.
+            if (distance < 196 || distance > 260) {
                 return false;
             }
 
