@@ -19,9 +19,9 @@ namespace ars_40X
 
         // Define subscribers.
         clusters_sub_ =
-            nh.subscribe("ars_40X/clusters", 10, &ContinentalRadarRViz::clusters_callback, this);
+            nh.subscribe("clusters", 10, &ContinentalRadarRViz::clusters_callback, this);
         objects_sub_ =
-            nh.subscribe("ars_40X/objects", 10, &ContinentalRadarRViz::objects_callback, this);
+            nh.subscribe("objects", 10, &ContinentalRadarRViz::objects_callback, this);
     }
 
     ContinentalRadarRViz::~ContinentalRadarRViz() {}
@@ -117,11 +117,7 @@ namespace ars_40X
         {
             visualization_msgs::Marker marker;
 
-            if (object.class_type == POINT)
-                marker.type = visualization_msgs::Marker::SPHERE;
-            else
-                marker.type = visualization_msgs::Marker::CUBE;
-            
+            marker.type = visualization_msgs::Marker::CUBE;
             marker.action = visualization_msgs::Marker::ADD;
 
             marker.header.frame_id = object_list.header.frame_id;
