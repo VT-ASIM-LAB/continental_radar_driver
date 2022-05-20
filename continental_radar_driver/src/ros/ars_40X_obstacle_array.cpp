@@ -1,5 +1,4 @@
 #include <ros/ros.h>
-#include <visualization_msgs/MarkerArray.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
 
 #include "ars_40X/ros/ars_40X_obstacle_array.hpp"

@@ -6,7 +6,13 @@
     <!--<param name="frame_id" value="radar_link"/>-->
     <remap from="odom" to="/hardware_interface/vehicle/twist"/>
   </node>
+
   <node pkg="ars_40X" type="ars_40X_rviz" name="ars_40X_rviz"/>
+
+  <node pkg="ars_40X" type="ars_40X_scan_track" name="ars_40X_scan_track">
+    <remap from="tracks" to="/hardware_interface/radar/tracks_raw"/>
+    <remap from="discovery" to="/hardware_interface/driver_discover"/>
+  </node>
 
   <group if="$(arg visualize)">
     <node pkg="rviz" type="rviz" name="rviz" args="-d $(find ars_40X)/rviz_cfg/ars_40X.rviz"/>

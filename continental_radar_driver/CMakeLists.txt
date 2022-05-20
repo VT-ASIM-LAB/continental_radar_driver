@@ -28,7 +28,9 @@ else ()
 endif ()
 
 find_package(costmap_converter REQUIRED)
+find_package(radar_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(cav_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 find_package(socket_can REQUIRED)
 find_package(std_msgs REQUIRED)
@@ -111,6 +113,12 @@ add_executable(ars_40X_obstacle_array
     )
 add_dependencies(ars_40X_obstacle_array ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries(ars_40X_obstacle_array ${catkin_LIBRARIES})
+
+add_executable(ars_40X_scan_track
+    src/ros/ars_40X_scan_track.cpp
+    )
+add_dependencies(ars_40X_scan_track ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+target_link_libraries(ars_40X_scan_track ${catkin_LIBRARIES})
 
 if ($ENV{ROS_VERSION} EQUAL 1)
   target_link_libraries(ars_40X_ros ars_40X_can ${catkin_LIBRARIES})
