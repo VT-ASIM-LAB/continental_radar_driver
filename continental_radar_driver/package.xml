@@ -2,10 +2,11 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>ars_40X</name>
-  <version>0.0.0</version>
-  <description>The ars_40X package contains a ROS driver for the Continental radar ARS_404 / ARS_408.</description>
-  <maintainer email="shiveshkhaitan@gmail.com">shiveshkhaitan</maintainer>
-  <license>TODO: License declaration</license>
+  <version>1.0.0</version>
+  <description>CARMA Platform ROS driver for Continental ARS 404-21 and ARS 408-21 radars.</description>
+  <maintainer email="goodarzm@vt.edu">Goodarz Mehr</maintainer>
+  <author email="shiveshkhaitan@gmail.com">shiveshkhaitan</author>
+  <license>MIT</license>
 
   <buildtool_depend condition="$ROS_VERSION==1">catkin</buildtool_depend>
   <buildtool_depend condition="$ROS_VERSION==2">ament_cmake</buildtool_depend>
