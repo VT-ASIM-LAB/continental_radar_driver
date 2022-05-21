@@ -11,7 +11,7 @@
 
   <node pkg="ars_40X" type="ars_40X_scan_track" name="ars_40X_scan_track">
     <remap from="tracks" to="/hardware_interface/radar/tracks_raw"/>
-    <remap from="discovery" to="/hardware_interface/driver_discover"/>
+    <remap from="discovery" to="/hardware_interface/driver_discovery"/>
   </node>
 
   <group if="$(arg visualize)">
