@@ -12,7 +12,7 @@ git clone https://github.com/VT-ASIM-LAB/continental_radar_driver.git
 cd continental_radar_driver/docker
 sudo ./build-image.sh -d
 ```
-After the Docker image is successfully built, connect the Continental radar to your device and run `sudo ip link set can0 up type can bitrate 500000` in the terminal. Add the following lines to the appropriate `docker-compose.yml` file in the `carma-config` directory:
+After the Docker image is successfully built, connect the Continental ARS 404-21 or ARS 408-21 radar to your device and run `sudo ip link set can0 up type can bitrate 500000` in the terminal. Add the following lines to the appropriate `docker-compose.yml` file in the `carma-config` directory:
 ```
 continental-radar-driver:
   image: usdotfhwastoldev/carma-continental-radar-driver:develop
@@ -51,11 +51,11 @@ ROS API
 Publication frequencies are provided for a [Continental ARS 408-21](https://conti-engineering.com/components/ars-408/) radar.
 * `ars_40X_ros/clusters [ars_40X/ClusterList]`: publishes a list of detected clusters (13 Hz).
 * `ars_40X_ros/objects [ars_40X/ObjectList]`: publishes a list of detected objects (13 Hz).
-* `ars_40X_ros/radar_status [ars_40X/RadarStatus]`: publishes the current radar status, including information on non-volatile memory (NVM) read/write state; maximum detection distance; persistent, temperature, temporary, or voltage errors; interference; sensor ID; sorting method; transmitted radar power; type of output (cluster or object); radar cross-section (RCS) threshold (standard or high sensitivity); whether quality and extended information is sent; whether vehicle motion signals are available. (1 Hz).
+* `ars_40X_ros/radar_status [ars_40X/RadarStatus]`: publishes the radar status, including information on non-volatile memory (NVM) read/write state; maximum detection distance; persistent, temperature, temporary, or voltage errors; interference; sensor ID; sorting method; transmitted radar power; type of output (cluster or object); [radar cross-section (RCS)](https://en.wikipedia.org/wiki/Radar_cross-section) threshold (standard or high sensitivity); whether quality and extended information is received; and whether vehicle motion signals are available. (1 Hz).
 * `ars_40X_rviz/visualize_clusters [visualization_msgs/MarkerArray]`: publishes array of markers representing detected clusters (13 Hz).
 * `ars_40X_rviz/visualize_objects [visualization_msgs/MarkerArray]`: publishes array of markers representing detected objects (13 Hz).
-* `ars_40X_rviz/visualize_texts [visualization_msgs/MarkerArray]`: publishes array of texts that correspond to detected objects and provide information such as relative velocity and acceleration, RCS, probability of detection, and class (13 Hz).
-* `ars_40X_scan_track/scan [radar_msgs/RadarScan]`: publishes a scan, i.e. a list of detected returns which correspond to clusters (13 Hz).
+* `ars_40X_rviz/visualize_texts [visualization_msgs/MarkerArray]`: publishes array of texts that correspond to detected objects and provide information such as relative velocity and acceleration, [RCS](https://en.wikipedia.org/wiki/Radar_cross-section), probability of detection, and object class (13 Hz).
+* `ars_40X_scan_track/scan [radar_msgs/RadarScan]`: publishes a scan, which is a list of detected returns, i.e. clusters (13 Hz).
 * `ars_40X_scan_track/tracks [radar_msgs/RadarTracks]`: publishes a list of detected tracks, i.e. objects (13 Hz).
 * `discovery [cav_msgs/DriverStatus]`: publishes the CARMA [DriverStatus](https://github.com/usdot-fhwa-stol/carma-msgs/blob/develop/cav_msgs/msg/DriverStatus.msg) message (1.25 Hz).
 
@@ -66,14 +66,14 @@ Publication frequencies are provided for a [Continental ARS 408-21](https://cont
 
 #### Services
 * `set_ctrl_relay_cfg [std_srvs/SetBool]`: sends relay control message to activate collision detection.
-* `set_max_distance [ars_40X/MaxDistance]`: configures the maximum distance of far scan, which also changes the range resolution proportionally (near scan maximum distance is set proportionally to half of the far scan maximum distance). For ARS 408-21
-* `set_output_type [ars_40X/OutputType]`: configures whether to output clusters, objects, or even to only stand by.
-* `set_radar_power [ars_40X/RadarPower]`: configures the transmitted radar power (Tx attenuation). The output RCS of cluster and objects will be compensated for this attenuation. Reducing the output power can improve detection in case of close range scenarios or inside rooms.
+* `set_max_distance [ars_40X/MaxDistance]`: configures the maximum distance of far scan, which also changes the range resolution proportionally (near scan maximum distance is set proportionally to half of the far scan maximum distance). For ARS 404-21 the allowed maximum distance range is 150 m - 190 m for the Standard Range firmware and 90 m - 1000 m for the Extended Range firmware. For ARS 408-21 the allowed maximum distance range is 196 m - 260 m for the Standard Range firmware and 196 m - 1200 m for the Extended Range firmware.
+* `set_output_type [ars_40X/OutputType]`: configures whether to output clusters, objects, or even to just stand by.
+* `set_radar_power [ars_40X/RadarPower]`: configures the transmitted radar power (Tx attenuation). The output [RCS](https://en.wikipedia.org/wiki/Radar_cross-section) of clusters and objects will be compensated for this attenuation. Reducing the output power can improve detection in case of close range scenarios or inside rooms.
 * `set_rcs_threshold [ars_40X/RCSThreshold]`: sets the sensitivity of cluster detection to standard or high sensitivity.
 * `set_send_ext_info [std_srvs/SetBool]`: configures whether extended object information is sent.
 * `set_send_quality [std_srvs/SetBool]`: configures whether object and cluster quality information is sent.
 * `set_sensor_id [ars_40X/SensorID]`: sets the sensor ID to a value from 0 to 7.
-* `set_sort_index [ars_40X/SortIndex]`: selects the sorting index for object list (range or RCS).
+* `set_sort_index [ars_40X/SortIndex]`: selects the sorting index for object list (range or [RCS](https://en.wikipedia.org/wiki/Radar_cross-section)).
 * `set_store_in_nvm [std_srvs/SetBool]`: stores the current configuration to NVM to be read and set at sensor startup.
 
 #### Parameters
@@ -82,7 +82,7 @@ N/A
 Examples
 --------
 
-See the `ars_40X.launch` file in the `continental_radar_driver/launch` directory that is used to launch the ARS 404-21 and ARS-408-21.
+See the `ars_40X.launch` file in the `continental_radar_driver/launch` directory that is used to launch the ARS 404-21 and ARS 408-21.
 
 Original ARS_40X Documentation
 ==============================
